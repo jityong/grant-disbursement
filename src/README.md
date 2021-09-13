@@ -46,4 +46,4 @@ them. Each household in the result contains family members that contributed to s
 to the existence of foreign key constraints to their spouse. I also added `updateFamilyMember` to allow 
 for update of a family member detail.
 
-* Uploaded a copy of `grants.postman_collection.json` for reference to API calls. 
+* Uploaded a copy of `grants.postman_collection.json` for reference to API calls. - Import into Postman for better visibility.
