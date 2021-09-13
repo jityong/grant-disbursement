@@ -1,0 +1,289 @@
+{
+	"info": {
+		"_postman_id": "2311d366-6d17-4ff9-9a3c-a53009e220d1",
+		"name": "grants",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getHousehold",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/getHousehold?householdId=9",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"getHousehold"
+					],
+					"query": [
+						{
+							"key": "householdId",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllHouseholds",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/getFamilyMember?id=32",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"getFamilyMember"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "32"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addMarriedCouple",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"members\": [\n        {\n            \"name\": \"husband\",\n            \"gender\": \"male\",\n            \"maritalStatus\": \"married\",\n            \"occupationType\": \"employed\",\n            \"annualIncome\": \"50000\",\n            \"dateOfBirth\": \"1997-11-09\",\n            \"householdId\": \"4\"\n        },\n        {\n            \"name\": \"wife\",\n            \"gender\": \"female\",\n            \"maritalStatus\": \"married\",\n            \"occupationType\": \"employed\",\n            \"annualIncome\": \"50000\",\n            \"dateOfBirth\": \"1997-11-09\",\n            \"householdId\": \"4\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/addMarriedCouple",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"addMarriedCouple"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addFamilyMember",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{    \n    \"name\": \"testname\",\n    \"gender\": \"male\",\n    \"maritalStatus\": \"married\",\n    \"occupationType\": \"employed\",\n    \"annualIncome\": \"50000\",\n    \"dateOfBirth\": \"1997-11-09\",    \n    \"householdId\":\"4\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/addFamilyMember",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"addFamilyMember"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createHousehold",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"HDB\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/createHousehold",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"createHousehold"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteFamilyMember",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "2",
+							"type": "text",
+							"disabled": true
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/deleteFamilyMember?id=25",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"deleteFamilyMember"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "25"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getGrant",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:5000/getGrant?householdSize=2&householdIncome=100000",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"getGrant"
+					],
+					"query": [
+						{
+							"key": "householdSize",
+							"value": "2"
+						},
+						{
+							"key": "householdIncome",
+							"value": "100000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateFamilyMember",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/updateFamilyMember?id=20&name=newname&occupationType=unemployed&dateOfBirth=1997-09-11&annualIncome=5000",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"updateFamilyMember"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "20"
+						},
+						{
+							"key": "name",
+							"value": "newname"
+						},
+						{
+							"key": "occupationType",
+							"value": "unemployed"
+						},
+						{
+							"key": "dateOfBirth",
+							"value": "1997-09-11"
+						},
+						{
+							"key": "annualIncome",
+							"value": "5000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteHousehold",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/deleteHousehold?id=1",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"deleteHousehold"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
