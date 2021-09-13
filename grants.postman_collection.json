@@ -35,6 +35,24 @@
 				"method": "GET",
 				"header": [],
 				"url": {
+					"raw": "localhost:5000/getAllHouseholds",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"getAllHouseholds"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getFamilyMember",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
 					"raw": "localhost:5000/getFamilyMember?id=32",
 					"host": [
 						"localhost"

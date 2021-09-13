@@ -20,19 +20,19 @@ This application is developed using Java 8 (Springboot). Databased used: Postgre
     ```
     brew install postgresql
     ```
-5. Open the source code and ensure that the JDK is set up for the project in your IDE.
-6. At the root directory, run `maven clean install` to download all dependencies and build the executable JAR.
-7. To run the application locally, update the user and password of your postgres DB in application.properties and create a Database table called `meteor` in your local postgres. 
+5. To run the application locally, update the user and password of your postgres DB in application.properties and create a Database table called `meteor` in your local postgres. 
     Example: 
     ```
     CREATE DATABASE meteor;
     ```
-8. Run the `init.sql` script using psql command line. 
+6. Run the `init.sql` script using psql command line. 
     Example with username `meteor`:
     ```
     psql -U meteor -d meteor -a -f src/main/resources/init.sql
-    ```   
-9. (Please complete step 8 first) Then, run the application using `java -jar target/grant_disbursement-0.0.1-SNAPSHOT.jar`.
+    ```
+7. Open the source code and ensure that the JDK is set up for the project in your IDE.
+8. (Please complete step 6 first) At the root directory, run `maven clean install` to download all dependencies and build the executable JAR.   
+9. Then, run the application using `java -jar target/grant_disbursement-0.0.1-SNAPSHOT.jar`.
 10. Finally, you can access the server at http://localhost:5000/ 
 
 ## Additional Notes
