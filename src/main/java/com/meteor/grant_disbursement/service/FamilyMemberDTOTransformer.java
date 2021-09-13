@@ -1,5 +1,7 @@
 package com.meteor.grant_disbursement.service;
 
+import com.meteor.grant_disbursement.error.InvalidFamilyMemberException;
+import com.meteor.grant_disbursement.error.InvalidHouseholdException;
 import com.meteor.grant_disbursement.model.FamilyMember;
 import com.meteor.grant_disbursement.model.dao.FamilyMemberRepository;
 import com.meteor.grant_disbursement.model.Household;
@@ -29,17 +31,17 @@ public class FamilyMemberDTOTransformer {
         if (!Objects.isNull(householdId)) {
             household = householdRepository.findById(householdId);
             if (!household.isPresent()) {
-                throw new RuntimeException("Invalid HouseholdID");
+                throw new InvalidHouseholdException("Invalid Household ID.");
             }
         }
         else {
-            throw new RuntimeException("Household ID cannot be empty");
+            throw new InvalidHouseholdException("Household ID cannot be empty");
         }
         FamilyMember spouse = null;
         if (!Objects.isNull(spouseId)) {
             Optional<FamilyMember> opSpouse = familyMemberRepository.findById(spouseId);
             if (!opSpouse.isPresent()) {
-                throw new RuntimeException("Invalid spouseId");
+                throw new InvalidFamilyMemberException("Invalid Spouse ID.");
             } else {
                 spouse = opSpouse.get();
             }

@@ -3,18 +3,20 @@ package com.meteor.grant_disbursement.service;
 import com.meteor.grant_disbursement.model.FamilyMember;
 import com.meteor.grant_disbursement.model.dao.FamilyMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.Date;
 import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class UpdateFields {
+public class UpdateFieldsSvc {
     FamilyMemberRepository familyMemberRepository;
 
     @Autowired
-    public UpdateFields(FamilyMemberRepository familyMemberRepository) {
+    public UpdateFieldsSvc(FamilyMemberRepository familyMemberRepository) {
         this.familyMemberRepository = familyMemberRepository;
     }
 
@@ -29,7 +31,7 @@ public class UpdateFields {
         if (Objects.nonNull(spouseId)) {
             Optional<FamilyMember> opSpouse = familyMemberRepository.findById(spouseId);
             if (!opSpouse.isPresent()) {
-                // throw error
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Spouse ID.");
             }
             familyMember.setSpouse(opSpouse.get());
         }
