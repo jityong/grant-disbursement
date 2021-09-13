@@ -2,7 +2,7 @@
 //
 //import com.meteor.grant_disbursement.model.FamilyMember;
 //import com.meteor.grant_disbursement.model.Household;
-//import com.meteor.grant_disbursement.model.HouseholdRepository;
+//import com.meteor.grant_disbursement.model.dao.HouseholdRepository;
 //import com.meteor.grant_disbursement.model.dto.FamilyMemberDTO;
 //import com.meteor.grant_disbursement.model.dto.HouseholdDTO;
 //import org.modelmapper.ModelMapper;

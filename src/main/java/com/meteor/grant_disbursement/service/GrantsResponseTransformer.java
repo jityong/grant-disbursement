@@ -2,7 +2,7 @@ package com.meteor.grant_disbursement.service;
 
 import com.meteor.grant_disbursement.model.FamilyMember;
 import com.meteor.grant_disbursement.model.Household;
-import com.meteor.grant_disbursement.model.HouseholdRepository;
+import com.meteor.grant_disbursement.model.dao.HouseholdRepository;
 import com.meteor.grant_disbursement.model.dto.HouseholdDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

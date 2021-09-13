@@ -1,15 +1,20 @@
 package com.meteor.grant_disbursement.controller;
 
 import com.meteor.grant_disbursement.model.*;
+import com.meteor.grant_disbursement.model.dao.FamilyMemberRepository;
+import com.meteor.grant_disbursement.model.dao.FamilyMemberRepositoryCustomImpl;
+import com.meteor.grant_disbursement.model.dao.HouseholdRepository;
 import com.meteor.grant_disbursement.model.dto.FamilyMemberDTO;
 import com.meteor.grant_disbursement.model.dto.GrantsResponse;
 import com.meteor.grant_disbursement.model.dto.HouseholdDTO;
 import com.meteor.grant_disbursement.service.FamilyMemberDTOTransformer;
 import com.meteor.grant_disbursement.service.GrantsResponseTransformer;
 import com.meteor.grant_disbursement.service.HouseholdDTOTransformer;
+import com.meteor.grant_disbursement.service.UpdateFields;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,17 +27,20 @@ public class GrantController {
     FamilyMemberRepositoryCustomImpl familyMemberRepositoryCustomImpl;
     FamilyMemberRepository familyMemberRepository;
     GrantsResponseTransformer grantsResponseTransformer;
+    UpdateFields updateFields;
 
     @Autowired
     public GrantController(HouseholdDTOTransformer householdDTOTransformer, FamilyMemberDTOTransformer familyMemberDTOTransformer,
                            FamilyMemberRepository familyMemberRepository, HouseholdRepository householdRepository,
-                           FamilyMemberRepositoryCustomImpl familyMemberRepositoryCustomImpl, GrantsResponseTransformer grantsResponseTransformer) {
+                           FamilyMemberRepositoryCustomImpl familyMemberRepositoryCustomImpl, GrantsResponseTransformer grantsResponseTransformer,
+                           UpdateFields updateFields) {
         this.householdDTOTransformer = householdDTOTransformer;
         this.familyMemberDTOTransformer = familyMemberDTOTransformer;
         this.householdRepository = householdRepository;
         this.familyMemberRepository = familyMemberRepository;
         this.familyMemberRepositoryCustomImpl = familyMemberRepositoryCustomImpl;
         this.grantsResponseTransformer = grantsResponseTransformer;
+        this.updateFields = updateFields;
     }
 
     @PostMapping("/createHousehold")
@@ -51,8 +59,29 @@ public class GrantController {
 
     @GetMapping("/getFamilyMember")
     public FamilyMemberDTO getFamilyMember(@RequestParam Long id) {
-        Optional<FamilyMember> familyMember = familyMemberRepository.findById(id);
-        return familyMemberDTOTransformer.transformToDTO(familyMember.get());
+        Optional<FamilyMember> opFamilyMember = familyMemberRepository.findById(id);
+        if (!opFamilyMember.isPresent()) {
+            //throw error
+        }
+        return familyMemberDTOTransformer.transformToDTO(opFamilyMember.get());
+    }
+
+    @PutMapping("/updateFamilyMember")
+    public FamilyMemberDTO updateFamilyMember(@RequestParam (required = true) Long id,
+                                              @RequestParam (required = false) String name,
+                                              @RequestParam (required = false) String gender,
+                                              @RequestParam (required = false) Long spouseId,
+                                              @RequestParam (required = false) String occupationType,
+                                              @RequestParam (required = false) Integer annualIncome,
+                                              @RequestParam (required = false) Date dateOfBirth
+                                              ) {
+        Optional<FamilyMember> opFamilyMember = familyMemberRepository.findById(id);
+        if (!opFamilyMember.isPresent()) {
+            //throw error
+        }
+        FamilyMember familyMember = opFamilyMember.get();
+        updateFields.updateFamilyMemberFields(familyMember, name, gender, spouseId, occupationType, annualIncome, dateOfBirth);
+        return familyMemberDTOTransformer.transformToDTO(familyMember);
     }
 
     @GetMapping("/getAllHouseholds")
@@ -97,5 +126,27 @@ public class GrantController {
         grantsResponse.setYoloGSTGrant(grantsResponseTransformer.createHouseholdDTOs(familyMembers));
 
         return grantsResponse;
+    }
+
+    @DeleteMapping("/deleteHousehold")
+    public HouseholdDTO deleteHousehold(@RequestParam Long id) {
+        Optional<Household> opHousehold = householdRepository.findById(id);
+        if (!opHousehold.isPresent()) {
+            // throw error
+            return null;
+        } else {
+            householdRepository.delete(opHousehold.get());
+            return householdDTOTransformer.transformToDTO(opHousehold.get());
+        }
+    }
+
+    @DeleteMapping("/deleteFamilyMember")
+    public FamilyMemberDTO deleteFamilyMember(@RequestParam Long id) {
+        Optional<FamilyMember> opFamilyMember = familyMemberRepository.findById(id);
+        if (!opFamilyMember.isPresent()) {
+            // throw error
+        }
+            familyMemberRepository.delete(opFamilyMember.get());
+            return familyMemberDTOTransformer.transformToDTO(opFamilyMember.get());
     }
 }

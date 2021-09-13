@@ -1,4 +1,6 @@
-package com.meteor.grant_disbursement.model;
+package com.meteor.grant_disbursement.model.dao;
+
+import com.meteor.grant_disbursement.model.FamilyMember;
 
 import java.util.List;
 

@@ -5,23 +5,24 @@ import com.meteor.grant_disbursement.model.Household;
 import com.meteor.grant_disbursement.model.dto.FamilyMemberDTO;
 import com.meteor.grant_disbursement.model.dto.HouseholdDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
 public class HouseholdDTOTransformer {
-    ModelMapper modelMapper;
     FamilyMemberDTOTransformer familyMemberDTOTransformer;
     @Autowired
-    public HouseholdDTOTransformer(ModelMapper modelMapper, FamilyMemberDTOTransformer familyMemberDTOTransformer) {
-        this.modelMapper = modelMapper;
+    public HouseholdDTOTransformer(FamilyMemberDTOTransformer familyMemberDTOTransformer) {
         this.familyMemberDTOTransformer = familyMemberDTOTransformer;
     }
 
     public Household transformToEntity(HouseholdDTO householdDTO) {
-        Household household = modelMapper.map(householdDTO, Household.class);
+        Household household = new Household();
+        household.setId(householdDTO.getId());
+        household.setType(householdDTO.getType());
+        household.setMembers(householdDTO.getMembers());
+
         return household;
     }
 

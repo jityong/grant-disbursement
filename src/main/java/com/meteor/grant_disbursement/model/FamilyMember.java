@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.*;
 
 import java.sql.Date;
+import java.util.Objects;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -31,6 +32,13 @@ public class FamilyMember {
     @JoinColumn(name = "household_id")
     @JsonManagedReference
     private Household household;
+
+    @PreRemove
+    private void preRemove() {
+        if (Objects.nonNull(spouse)) {
+            spouse.setSpouse(null);
+        }
+    }
 
     public java.lang.Long getId() {
         return id;

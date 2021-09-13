@@ -1,5 +1,6 @@
-package com.meteor.grant_disbursement.model;
+package com.meteor.grant_disbursement.model.dao;
 
+import com.meteor.grant_disbursement.model.FamilyMember;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

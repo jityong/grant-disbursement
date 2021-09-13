@@ -1,11 +1,10 @@
 package com.meteor.grant_disbursement.service;
 
 import com.meteor.grant_disbursement.model.FamilyMember;
-import com.meteor.grant_disbursement.model.FamilyMemberRepository;
+import com.meteor.grant_disbursement.model.dao.FamilyMemberRepository;
 import com.meteor.grant_disbursement.model.Household;
-import com.meteor.grant_disbursement.model.HouseholdRepository;
+import com.meteor.grant_disbursement.model.dao.HouseholdRepository;
 import com.meteor.grant_disbursement.model.dto.FamilyMemberDTO;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -13,13 +12,11 @@ import java.util.Optional;
 
 @Service
 public class FamilyMemberDTOTransformer {
-    ModelMapper modelMapper;
     HouseholdRepository householdRepository;
     FamilyMemberRepository familyMemberRepository;
 
-    public FamilyMemberDTOTransformer(ModelMapper modelMapper, HouseholdRepository householdRepository,
+    public FamilyMemberDTOTransformer(HouseholdRepository householdRepository,
                                       FamilyMemberRepository familyMemberRepository) {
-        this.modelMapper = modelMapper;
         this.householdRepository = householdRepository;
         this.familyMemberRepository = familyMemberRepository;
     }
